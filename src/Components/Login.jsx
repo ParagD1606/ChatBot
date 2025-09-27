@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Login = ({ isOpen, onClose, onSubmit }) => {
+const Login = ({ isOpen, onClose, navigate }) => { // Accept the navigate prop
   const [show, setShow] = useState(false);
   const [role, setRole] = useState("student"); // student or admin
 
@@ -18,7 +18,15 @@ const Login = ({ isOpen, onClose, onSubmit }) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    if (onSubmit) onSubmit({ email, password, role });
+    onClose(); // Close the modal on submission
+
+    // --- Navigate based on role ---
+    if (role === "student") {
+      navigate('/chat');
+    } else if (role === "admin") {
+      navigate('/admin');
+    }
+    // -----------------------------
   };
 
   return (

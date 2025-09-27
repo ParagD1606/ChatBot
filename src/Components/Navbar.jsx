@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Login from './Login';
 
-const Navbar = () => {
+const Navbar = ({ navigate }) => { // Accept the navigate prop
   const [isOpen, setIsOpen] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
 
@@ -46,7 +46,7 @@ const Navbar = () => {
             </li>
           </ul>
 
-          <Login isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
+          <Login isOpen={loginOpen} onClose={() => setLoginOpen(false)} navigate={navigate} /> {/* Pass navigate prop to Login */}
 
           <div className="md:hidden">
             <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none">
@@ -86,7 +86,7 @@ const Navbar = () => {
               </button>
             </li>
           </ul>
-          <Login isOpen={loginOpen} onClose={() => setLoginOpen(false)} />
+          <Login isOpen={loginOpen} onClose={() => setLoginOpen(false)} navigate={navigate} /> {/* Pass navigate prop to Login */}
         </div>
       </nav>
 
