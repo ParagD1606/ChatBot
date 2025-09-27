@@ -12,6 +12,8 @@ import {
   MailIcon,
   Image as ImageIcon,
   GraduationCap,
+  Trash2,
+  MessageCircle,
 } from "lucide-react";
 import TypingIndicator from "./TypingIndecator";
 import VoiceToText from "./VoiceToText";
@@ -70,7 +72,7 @@ export default function ChatBot() {
     }
 
     return translations[lang].prototype;
-};
+  };
   // ------------------------------------------------
 
   const handleSend = () => {
@@ -162,6 +164,23 @@ export default function ChatBot() {
     };
     setChatSessions((prev) => [...prev, newChat]);
     setActiveId(newChat.id);
+    setSidebarOpen(false); // Close sidebar on mobile after starting new chat
+  };
+
+  const deleteChat = (e, id) => {
+    e.stopPropagation(); // Prevents the parent button from triggering
+    setChatSessions((prev) => {
+      const filteredChats = prev.filter((chat) => chat.id !== id);
+      if (filteredChats.length === 0) {
+        // If all chats are deleted, start a new one
+        startNewChat();
+        return [];
+      }
+      if (activeId === id) {
+        setActiveId(filteredChats[0].id);
+      }
+      return filteredChats;
+    });
   };
 
   const handleLanguageChange = (e) => {
@@ -182,23 +201,25 @@ export default function ChatBot() {
       <div
         className={`${
           sidebarOpen ? "block" : "hidden"
-        } md:flex fixed md:static inset-0 md:inset-auto z-20 w-64 bg-[#778DA9] text-white flex-col`}
+        } md:flex fixed md:static inset-0 md:inset-auto z-20 w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-col`}
       >
-        <div className="flex items-center justify-between px-4 py-4 font-bold text-xl border-b border-white/20">
+        <div className="flex items-center justify-between px-4 py-5 font-bold text-xl border-b border-white/10">
           <div className="flex items-center gap-2">
-            <Bot className="w-6 h-6" /> SAHAYAK
+            <Bot className="w-6 h-6 text-blue-400" /> SAHAYAK
           </div>
-          <button className="md:hidden" onClick={() => setSidebarOpen(false)}>
+          <button className="md:hidden p-2 rounded-full hover:bg-white/10" onClick={() => setSidebarOpen(false)}>
             <X className="w-6 h-6" />
           </button>
         </div>
-        <div className="flex-1 overflow-y-auto">
+        <div className="p-4">
           <button
             onClick={startNewChat}
-            className="flex items-center gap-2 w-full px-4 py-3 hover:bg-white/20 transition border-b border-white/20"
+            className="flex items-center gap-2 w-full px-4 py-3 rounded-lg bg-gray-700 hover:bg-gray-600 transition"
           >
             <Plus className="w-5 h-5" /> New Chat
           </button>
+        </div>
+        <div className="flex-1 overflow-y-auto space-y-2 px-2 pb-2">
           {chatSessions.map((chat) => (
             <button
               key={chat.id}
@@ -206,30 +227,40 @@ export default function ChatBot() {
                 setActiveId(chat.id);
                 setSidebarOpen(false);
               }}
-              className={`w-full text-left px-4 py-3 hover:bg-white/20 transition ${
-                activeId === chat.id ? "bg-white/20" : ""
+              className={`relative flex items-center gap-3 w-full text-left px-4 py-3 rounded-lg transition group ${
+                activeId === chat.id
+                  ? "bg-gray-700 text-white font-semibold"
+                  : "hover:bg-gray-700/50 text-gray-300"
               }`}
             >
-              {chat.title}
+              <MessageCircle className="w-4 h-4" />
+              <span className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">
+                {chat.title}
+              </span>
+              <Trash2
+                onClick={(e) => deleteChat(e, chat.id)}
+                className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity absolute right-4"
+              />
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-2 px-4 py-4 border-t border-white/20">
-          <img src={ProfilePic} alt="Profile" className="w-8 h-8 rounded-full" />
-          <span className="text-md font-semibold">Student User</span>
-        </div>
-        <div className="px-4 py-4 border-t border-white/20">
+        <div className="border-t border-white/10 p-4">
+          <div className="flex items-center gap-3 mb-4">
+            <img src={ProfilePic} alt="Profile" className="w-9 h-9 rounded-full border-2 border-blue-400" />
+            <span className="text-md font-semibold text-white">Student User</span>
+          </div>
           <Link
             to="/"
-            className="flex items-center gap-2 hover:bg-white/20 px-3 py-2 rounded-lg transition"
+            className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg transition"
           >
-            <HomeIcon className="w-5 h-5" /> Home
+            <HomeIcon className="w-5 h-5 text-gray-300" /> Home
           </Link>
         </div>
       </div>
 
-      {/* Chat Area */}
+      {/* Chat Area - rest of your component */}
       <div className="flex-1 flex flex-col">
+        {/* ... (rest of the ChatBot component) ... */}
         <div className="bg-white px-4 py-3 shadow flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
@@ -263,7 +294,7 @@ export default function ChatBot() {
               }`}
             >
               {msg.sender === "bot" && (
-                <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-3 shrink-0">
+                <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center mr-3 shrink-0">
                   <Bot className="w-5 h-5 text-gray-600" />
                 </div>
               )}
@@ -271,7 +302,7 @@ export default function ChatBot() {
                 className={`px-4 py-3 rounded-2xl max-w-xs shadow-lg break-words ${
                   msg.sender === "user"
                     ? "bg-blue-600 text-white rounded-br-none"
-                    : "bg-gray-200 text-gray-800 rounded-bl-none"
+                    : "bg-gray-50 text-gray-800 rounded-bl-none"
                 }`}
               >
                 {msg.image ? (

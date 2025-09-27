@@ -1,21 +1,55 @@
 import React, { useState } from "react";
-import qaData from "./qaData.json";
+import qaData from "../qaData.json";
+import { Upload } from 'lucide-react';
 
 const FaqManagement = () => {
+  const [faqData, setFaqData] = useState(qaData);
   const [newQa, setNewQa] = useState({
-    en: { question: "", answer: "" },
+    en: { question: "", answer: "", keywords: [] },
     hi: { question: "", answer: "" },
   });
+  const [pdfFile, setPdfFile] = useState(null);
 
   const handleInputChange = (e, lang, type) => {
     setNewQa(prev => ({ ...prev, [lang]: { ...prev[lang], [type]: e.target.value } }));
   };
 
-  const handleSubmit = (e) => {
+  const handleAddQa = (e) => {
     e.preventDefault();
-    console.log("New QA submitted:", newQa);
-    alert("New QA logged in console");
-    setNewQa({ en: { question: "", answer: "" }, hi: { question: "", answer: "" } });
+    const newEntry = {
+      question: { en: newQa.en.question, hi: newQa.hi.question },
+      answer: { en: newQa.en.answer, hi: newQa.hi.answer },
+      keywords: newQa.en.keywords
+    };
+    
+    // Simulate adding to the list
+    setFaqData(prev => [...prev, newEntry]);
+    
+    // Log to console as a placeholder for API call
+    console.log("New QA submitted:", newEntry);
+    alert("New Q&A added successfully! (Logged to console)");
+    
+    // Reset form fields
+    setNewQa({
+      en: { question: "", answer: "", keywords: [] },
+      hi: { question: "", answer: "" },
+    });
+  };
+
+  const handlePdfUpload = (e) => {
+    e.preventDefault();
+    if (!pdfFile) {
+      alert("Please select a PDF file first.");
+      return;
+    }
+    
+    // Simulate file upload
+    console.log("PDF file uploaded:", pdfFile.name, pdfFile);
+    alert(`PDF file "${pdfFile.name}" uploaded successfully! (Logged to console)`);
+    
+    // Reset file input
+    setPdfFile(null);
+    e.target.reset();
   };
 
   return (
@@ -23,12 +57,13 @@ const FaqManagement = () => {
       <h1 className="text-3xl font-bold">FAQ Management</h1>
       <p className="text-gray-700">Add or remove frequently asked questions to improve chatbot accuracy.</p>
 
-      <div className="bg-white p-6 rounded-lg shadow space-y-6">
-        <h3 className="text-lg font-bold text-gray-700">Manage Chatbot Q&A</h3>
+      {/* Existing Questions Section */}
+      <div className="bg-white p-6 rounded-lg shadow-lg space-y-4">
+        <h3 className="text-xl font-bold text-gray-700">Manage Chatbot Q&A</h3>
         <div className="bg-gray-100 p-4 rounded-lg max-h-64 overflow-y-auto">
           <h4 className="font-semibold mb-2">Existing Questions</h4>
           <ul className="space-y-2">
-            {qaData.map((item, i) => (
+            {faqData.map((item, i) => (
               <li key={i} className="bg-white p-3 rounded shadow-sm">
                 <p className="font-medium">Q: {item.question.en}</p>
                 <p className="text-sm text-gray-500">A: {item.answer.en}</p>
@@ -36,15 +71,19 @@ const FaqManagement = () => {
             ))}
           </ul>
         </div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+      {/* Add New Q&A Section */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <form onSubmit={handleAddQa} className="space-y-4">
+          <h4 className="font-semibold text-gray-700">Add New Q&A</h4>
           <div>
             <label className="block text-sm font-medium text-gray-700">English Question</label>
             <input
               type="text"
               value={newQa.en.question}
               onChange={(e) => handleInputChange(e, "en", "question")}
-              className="mt-1 w-full rounded border-gray-300 shadow-sm focus:ring-cyan-500"
+              className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500"
               required
             />
           </div>
@@ -54,7 +93,7 @@ const FaqManagement = () => {
               rows="2"
               value={newQa.en.answer}
               onChange={(e) => handleInputChange(e, "en", "answer")}
-              className="mt-1 w-full rounded border-gray-300 shadow-sm focus:ring-cyan-500"
+              className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500"
               required
             />
           </div>
@@ -64,7 +103,7 @@ const FaqManagement = () => {
               type="text"
               value={newQa.hi.question}
               onChange={(e) => handleInputChange(e, "hi", "question")}
-              className="mt-1 w-full rounded border-gray-300 shadow-sm focus:ring-cyan-500"
+              className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500"
               required
             />
           </div>
@@ -74,15 +113,52 @@ const FaqManagement = () => {
               rows="2"
               value={newQa.hi.answer}
               onChange={(e) => handleInputChange(e, "hi", "answer")}
-              className="mt-1 w-full rounded border-gray-300 shadow-sm focus:ring-cyan-500"
+              className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500"
               required
             />
           </div>
-          <button type="submit" className="w-full py-2 px-4 rounded text-white bg-cyan-600 hover:bg-cyan-700">
+          <button type="submit" className="w-full py-2 px-4 rounded-md text-white bg-cyan-600 hover:bg-cyan-700">
             Add New Q&A
           </button>
         </form>
       </div>
+      
+      {/* PDF Upload Section */}
+      <div className="bg-white p-6 rounded-lg shadow-lg space-y-4">
+        <h4 className="font-semibold text-gray-700">Upload Knowledge Base PDF</h4>
+        <form onSubmit={handlePdfUpload} className="space-y-4">
+          <label className="block text-sm font-medium text-gray-700">
+            Select a PDF file to add to the knowledge base:
+          </label>
+          <div className="mt-1 flex justify-center items-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+            <div className="space-y-1 text-center">
+              <Upload className="mx-auto h-12 w-12 text-gray-400" />
+              <div className="flex text-sm text-gray-600">
+                <label
+                  htmlFor="file-upload"
+                  className="relative cursor-pointer bg-white rounded-md font-medium text-cyan-600 hover:text-cyan-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-cyan-500"
+                >
+                  <span>Upload a file</span>
+                  <input
+                    id="file-upload"
+                    name="file-upload"
+                    type="file"
+                    className="sr-only"
+                    accept=".pdf"
+                    onChange={(e) => setPdfFile(e.target.files[0])}
+                  />
+                </label>
+                <p className="pl-1">or drag and drop</p>
+              </div>
+              <p className="text-xs text-gray-500">PDF up to 10MB</p>
+            </div>
+          </div>
+          <button type="submit" className="w-full py-2 px-4 rounded-md text-white bg-cyan-600 hover:bg-cyan-700">
+            Process PDF
+          </button>
+        </form>
+      </div>
+
     </div>
   );
 };
