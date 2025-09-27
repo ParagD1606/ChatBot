@@ -1,25 +1,35 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Hero2 from './Components/Hero2';
 import Footer from './Components/Footer';
 import About from './Components/About';
-import Menu from './Components/Menu';
+import ChatBot from './Components/ChatBot';
+
+const Layout = ({ children }) => {
+  const location = useLocation();
+
+  const hideLayout = location.pathname === "/chat";
+
+  return (
+    <div className="min-h-screen w-fulloverflow-x-hidden">
+      {!hideLayout && <Navbar />}
+      {children}
+      {!hideLayout && <Footer />}
+    </div>
+  );
+};
 
 const App = () => {
   return (
     <Router>
-      <div className="min-h-screen w-full bg-gray-200 overflow-x-hidden">
-        <Navbar />
-
+      <Layout>
         <Routes>
           <Route path="/" element={<Hero2 />} />
-          <Route path="/menu" element={<Menu />} />
+          <Route path="/chat" element={<ChatBot />} />
           <Route path="/about" element={<About />} />
         </Routes>
-
-        <Footer />
-      </div>
+      </Layout>
     </Router>
   );
 };

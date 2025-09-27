@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from "react";
 
-const Login = ({ isOpen, onClose }) => {
+const Login = ({ isOpen, onClose, onSubmit }) => {
   const [show, setShow] = useState(false);
+  const [role, setRole] = useState("student"); // student or admin
 
   useEffect(() => {
-    if (isOpen) {
-      setShow(true); // trigger animation
-    } else {
-      // delay hiding for smooth fade out
+    if (isOpen) setShow(true);
+    else {
       const timeout = setTimeout(() => setShow(false), 300);
       return () => clearTimeout(timeout);
     }
@@ -15,42 +14,79 @@ const Login = ({ isOpen, onClose }) => {
 
   if (!isOpen && !show) return null;
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    if (onSubmit) onSubmit({ email, password, role });
+  };
+
   return (
     <div
-      className={`fixed inset-0 flex justify-center items-center z-50 transition-opacity duration-300
-        ${isOpen ? 'bg-black bg-opacity-50 opacity-100' : 'bg-black bg-opacity-0 opacity-0'}`}
+      className={`fixed inset-0 z-50 flex items-center justify-center transition-opacity duration-300 ${
+        isOpen ? "bg-black/50 opacity-100 backdrop-blur-sm" : "bg-black/0 opacity-0"
+      }`}
     >
       <div
-        className={`w-72 bg-slate-500 border-2 border-cyan-400 rounded-3xl p-6 transform transition-all duration-300
-          ${isOpen ? 'scale-100 opacity-100' : 'scale-90 opacity-0'}`}
+        className={`w-80 rounded-3xl border border-cyan-400 bg-slate-600 p-6 shadow-xl transform transition-all duration-300 ${
+          isOpen ? "scale-100 opacity-100" : "scale-90 opacity-0"
+        }`}
       >
-        <h1 className="text-center text-white font-semibold text-3xl mb-14">
-          Login
-        </h1>
-        <form className="flex flex-col gap-6 items-center">
+        {/* Role Toggle */}
+        <div className="mb-4 flex justify-center gap-4">
+          <button
+            type="button"
+            onClick={() => setRole("student")}
+            className={`px-4 py-1 rounded-full font-semibold ${
+              role === "student" ? "bg-cyan-500 text-white" : "bg-slate-700 text-gray-300"
+            }`}
+          >
+            Student
+          </button>
+          <button
+            type="button"
+            onClick={() => setRole("admin")}
+            className={`px-4 py-1 rounded-full font-semibold ${
+              role === "admin" ? "bg-cyan-500 text-white" : "bg-slate-700 text-gray-300"
+            }`}
+          >
+            Admin
+          </button>
+        </div>
+
+        <h1 className="mb-8 text-center text-3xl font-bold text-white">{role === "student" ? "Student Login" : "Admin Login"}</h1>
+
+        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <input
+            name="email"
             type="email"
             placeholder="Email"
-            className="w-[90%] px-4 py-2 rounded-full outline-none focus:ring-2 focus:ring-cyan-400 text-black bg-white"
+            required
+            className="w-full rounded-full bg-white px-4 py-2 text-black outline-none focus:ring-2 focus:ring-cyan-400"
           />
           <input
+            name="password"
             type="password"
             placeholder="Password"
-            className="w-[90%] px-4 py-2 rounded-full outline-none focus:ring-2 focus:ring-cyan-400 text-black bg-white"
+            required
+            className="w-full rounded-full bg-white px-4 py-2 text-black outline-none focus:ring-2 focus:ring-cyan-400"
           />
           <button
             type="submit"
-            className="bg-cyan-500 hover:bg-cyan-600 active:opacity-70 text-white px-6 py-2 rounded-full transition-all duration-300"
+            className="w-full rounded-full bg-cyan-500 px-6 py-2 font-semibold text-white shadow-md transition-colors duration-300 hover:bg-cyan-600 active:opacity-80"
           >
-            Submit
+            Login
           </button>
-          <p className="text-gray-200 cursor-pointer hover:text-white transition duration-300">
-            New user ?
+
+          <p className="text-center text-gray-200">
+            New user?{" "}
+            <span className="cursor-pointer text-cyan-300 hover:underline">Register</span>
           </p>
+
           <button
             type="button"
             onClick={onClose}
-            className="text-sm text-cyan-400 underline mt-4"
+            className="mt-2 text-sm text-cyan-300 hover:underline"
           >
             Cancel
           </button>

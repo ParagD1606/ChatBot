@@ -1,5 +1,5 @@
 import React from "react";
-import Aboutus from "../assets/Aboutus.webp"
+import Aboutus from "../assets/Aboutus.webp";
 
 export default function About() {
   return (
@@ -13,13 +13,12 @@ export default function About() {
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             <span className="bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent">
-              About Us
+              About SAHAYAK
             </span>
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            We’re passionate about delivering intuitive, high-performance, and
-            visually stunning web solutions. Our goal is to make complex
-            technology simple and accessible for everyone.
+            SAHAYAK is your one-stop platform for instant college information. 
+            Track schedules, check fees, discover scholarships, and stay updated with real-time data to make smarter decisions.
           </p>
         </div>
 
@@ -28,8 +27,8 @@ export default function About() {
           {/* Image */}
           <div className="relative w-full h-64 md:h-96">
             <img
-              src={Aboutus} // keep your image path here
-              alt="About"
+              src={Aboutus}
+              alt="About SAHAYAK"
               className="w-full h-full object-cover rounded-2xl shadow-lg"
             />
           </div>
@@ -37,22 +36,19 @@ export default function About() {
           {/* Text */}
           <div className="space-y-6 text-gray-700 dark:text-gray-300">
             <h3 className="text-2xl font-semibold">
-              Why Choose <span className="text-blue-500">Us?</span>
+              Why Choose <span className="text-blue-500">SAHAYAK?</span>
             </h3>
             <p>
-              We focus on crafting tailored solutions that perfectly align with
-              your goals. Every project is built with modern technologies,
-              responsive design, and a seamless user experience in mind.
+              SAHAYAK is designed to simplify your college journey. Whether you’re exploring colleges, checking schedules, or applying for scholarships, we make it easy and accessible.
             </p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>⚡ Lightning-fast performance</li>
-              <li>🎨 Modern & visually engaging design</li>
-              <li>🔒 Secure and reliable architecture</li>
-              <li>📱 Fully responsive for all devices</li>
+              <li>🎓 Instant college information at your fingertips</li>
+              <li>📅 Track class schedules and important dates</li>
+              <li>💰 Check fees and explore scholarships easily</li>
+              <li>📲 Real-time updates for smarter planning</li>
             </ul>
             <p>
-              Our commitment to innovation and detail ensures that your digital
-              presence truly stands out.
+              Our mission is to empower students with accurate, reliable, and actionable information so that every college decision is informed and stress-free.
             </p>
           </div>
         </div>
