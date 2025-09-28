@@ -17,7 +17,7 @@ const AdminDashboard = ({ onLogout }) => {
   };
 
   return (
-    <div className="flex bg-gray-100 min-h-screen">
+    <div className="flex bg-[#F8F4EC] min-h-screen">
       <Sidebar activeView={activeView} setActiveView={setActiveView} onLogout={onLogout} />
       <main className="flex-1 ml-64 p-10 overflow-y-auto">{renderContent()}</main>
     </div>

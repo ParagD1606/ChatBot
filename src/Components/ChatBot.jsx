@@ -11,23 +11,100 @@ import {
   PhoneCallIcon,
   MailIcon,
   Image as ImageIcon,
-  GraduationCap,
   Trash2,
   MessageCircle,
 } from "lucide-react";
 import TypingIndicator from "./TypingIndecator";
 import VoiceToText from "./VoiceToText";
 import TextToSpeech from "./TextToSpeech";
-import ProfilePic from "../assets/ProfilePic.jpeg"; // your profile pic
-import qaData from "./qaData.json"; // your JSON
+import ProfilePic from "../assets/ProfilePic.jpeg";
+import qaData from "./qaData.json";
 
 const translations = {
-  en: { label: "English", welcome1: "Hello! How can I help you today?", prototype: "This is a prototype response 🤖" },
-  hi: { label: "हिंदी", welcome1: "नमस्ते! मैं आज आपकी कैसे मदद कर सकता हूँ?", prototype: "यह एक प्रोटोटाइप उत्तर है 🤖" },
-  mr: { label: "मराठी", welcome1: "नमस्कार! मी आज तुमची कशी मदत करू शकतो?", prototype: "हा एक प्रोटोटाइप प्रतिसाद आहे 🤖" },
-  gu: { label: "ગુજરાતી", welcome1: "નમસ્તે! આજે હું તમારી કેવી રીતે મદદ કરી શકું?", prototype: "આ એક પ્રોટોટાઇપ જવાબ છે 🤖" },
-  rj: { label: "राजस्थानी", welcome1: "राम राम सा! आज म्हारो थारी किमें मदद करूं?", prototype: "यो एक प्रोटोटाइप जवाब है 🤖" },
-  mw: { label: "मारवाड़ी", welcome1: "खम्मा घणी! आज थारी किमें मदद करूं?", prototype: "ई एक प्रोटोटाइप जवाब है 🤖" },
+  en: {
+    label: "English",
+    welcome1: "Hello! How can I help you today?",
+    prototype: "I don’t have an answer right now. You can contact the college administration for assistance.",
+    ui: {
+      home: "Home",
+      studentUser: "Student User",
+      quickQuestions: "Quick Questions",
+      contactDetails: "Contact Details",
+      callOffice: "Call Office",
+      sendEmail: "Send Email",
+      newChat: "New Chat",
+    },
+  },
+  hi: {
+    label: "हिंदी",
+    welcome1: "नमस्ते! मैं आज आपकी कैसे मदद कर सकता हूँ?",
+    prototype: "मेरे पास अभी उत्तर नहीं है। सहायता के लिए आप कॉलेज प्रशासन से संपर्क कर सकते हैं।",
+    ui: {
+      home: "होम",
+      studentUser: "विद्यार्थी उपयोगकर्ता",
+      quickQuestions: "त्वरित प्रश्न",
+      contactDetails: "संपर्क विवरण",
+      callOffice: "कार्यालय को कॉल करें",
+      sendEmail: "ईमेल भेजें",
+      newChat: "नई बातचीत",
+    },
+  },
+  mr: {
+    label: "मराठी",
+    welcome1: "नमस्कार! मी आज तुमची कशी मदत करू शकतो?",
+    prototype: "सध्या माझ्याकडे उत्तर नाही. मदतीसाठी आपण कॉलेज प्रशासनाशी संपर्क साधू शकता.",
+    ui: {
+      home: "मुखपृष्ठ",
+      studentUser: "विद्यार्थी वापरकर्ता",
+      quickQuestions: "झटपट प्रश्न",
+      contactDetails: "संपर्क तपशील",
+      callOffice: "कार्यालयाला कॉल करा",
+      sendEmail: "ईमेल पाठवा",
+      newChat: "नवीन चॅट",
+    },
+  },
+  gu: {
+    label: "ગુજરાતી",
+    welcome1: "નમસ્તે! આજે હું તમારી કેવી રીતે મદદ કરી શકું?",
+    prototype: "મારી પાસે હાલમાં જવાબ નથી. સહાય માટે તમે કોલેજ પ્રશાસનનો સંપર્ક કરી શકો છો.",
+    ui: {
+      home: "હોમ",
+      studentUser: "વિદ્યાર્થી યુઝર",
+      quickQuestions: "ઝડપી પ્રશ્નો",
+      contactDetails: "સંપર્ક વિગતો",
+      callOffice: "ઓફિસમાં ફોન કરો",
+      sendEmail: "ઇમેલ મોકલો",
+      newChat: "નવી વાતચીત",
+    },
+  },
+  rj: {
+    label: "राजस्थानी",
+    welcome1: "राम राम सा! आज म्हारो थारी किमें मदद करूं?",
+    prototype: "अभी मेरे पास उत्तर नहीं है। सहायता के लिए आप कॉलेज प्रशासन से संपर्क कर सकते हैं।",
+    ui: {
+      home: "घर",
+      studentUser: "विद्यार्थी उपयोगकर्ता",
+      quickQuestions: "जल्दी प्रश्न",
+      contactDetails: "संपर्क जानकारी",
+      callOffice: "ऑफिस कॉल करो",
+      sendEmail: "ईमेल भेजो",
+      newChat: "नया चैट",
+    },
+  },
+  mw: {
+    label: "मारवाड़ी",
+    welcome1: "खम्मा घणी! आज थारी किमें मदद करूं?",
+    prototype: "अभी मेरे पास उत्तर नहीं है। सहायता के लिए आप कॉलेज प्रशासन से संपर्क कर सकते हैं।",
+    ui: {
+      home: "घर",
+      studentUser: "विद्यार्थी यूजर",
+      quickQuestions: "झटपट प्रश्न",
+      contactDetails: "संपर्क जानकारी",
+      callOffice: "ऑफिस फोन करो",
+      sendEmail: "ईमेल भेजो",
+      newChat: "नवां चैट",
+    },
+  },
 };
 
 const languageMap = { en: "en-IN", hi: "hi-IN", mr: "mr-IN", gu: "gu-IN", rj: "hi-IN", mw: "hi-IN" };
@@ -43,37 +120,25 @@ export default function ChatBot() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef(null);
-
-  // 🔽 ref for auto-scroll
   const bottomRef = useRef(null);
 
   const activeChat = chatSessions.find((c) => c.id === activeId) || chatSessions[0];
 
-  // 🔽 scroll to bottom whenever messages change
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [activeChat.messages]);
 
-  // ---------------- JSON Q&A Lookup ----------------
   const findAnswer = (userInput, lang) => {
     const text = userInput.trim().toLowerCase();
-
     for (const qa of qaData) {
-      // 1️⃣ Check keywords first
-      if (qa.keywords && qa.keywords.some(kw => text.includes(kw.toLowerCase()))) {
+      if (qa.keywords && qa.keywords.some((kw) => text.includes(kw.toLowerCase()))) {
         return qa.answer[lang];
       }
-
-      // 2️⃣ Fallback: match the localized question exactly/partially
       const qText = qa.question[lang].toLowerCase();
-      if (text.includes(qText)) {
-        return qa.answer[lang];
-      }
+      if (text.includes(qText)) return qa.answer[lang];
     }
-
     return translations[lang].prototype;
   };
-  // ------------------------------------------------
 
   const handleSend = () => {
     if (!input.trim()) return;
@@ -81,15 +146,11 @@ export default function ChatBot() {
     let updated = chatSessions.map((c) =>
       c.id === activeId ? { ...c, messages: [...c.messages, userMsg] } : c
     );
-
     const current = updated.find((c) => c.id === activeId);
     if (current.messages.filter((m) => m.sender === "user").length === 1) {
       const title = input.length > 20 ? input.slice(0, 20) + "…" : input;
-      updated = updated.map((c) =>
-        c.id === activeId ? { ...c, title } : c
-      );
+      updated = updated.map((c) => (c.id === activeId ? { ...c, title } : c));
     }
-
     setChatSessions(updated);
     const tempInput = input;
     setInput("");
@@ -132,9 +193,7 @@ export default function ChatBot() {
           : findAnswer(userText, language);
       setChatSessions((prev) =>
         prev.map((c) =>
-          c.id === activeId
-            ? { ...c, messages: [...c.messages, { sender: "bot", text: botText }] }
-            : c
+          c.id === activeId ? { ...c, messages: [...c.messages, { sender: "bot", text: botText }] } : c
         )
       );
     }, 1200);
@@ -147,9 +206,7 @@ export default function ChatBot() {
     reader.onload = () => {
       const imageMsg = { sender: "user", image: reader.result };
       setChatSessions((prev) =>
-        prev.map((c) =>
-          c.id === activeId ? { ...c, messages: [...c.messages, imageMsg] } : c
-        )
+        prev.map((c) => (c.id === activeId ? { ...c, messages: [...c.messages, imageMsg] } : c))
       );
       botReply("image_uploaded");
     };
@@ -159,26 +216,23 @@ export default function ChatBot() {
   const startNewChat = () => {
     const newChat = {
       id: Date.now(),
-      title: "New Chat",
+      title: translations[language].ui.newChat,
       messages: [{ sender: "bot", text: translations[language].welcome1 }],
     };
     setChatSessions((prev) => [...prev, newChat]);
     setActiveId(newChat.id);
-    setSidebarOpen(false); // Close sidebar on mobile after starting new chat
+    setSidebarOpen(false);
   };
 
   const deleteChat = (e, id) => {
-    e.stopPropagation(); // Prevents the parent button from triggering
+    e.stopPropagation();
     setChatSessions((prev) => {
       const filteredChats = prev.filter((chat) => chat.id !== id);
       if (filteredChats.length === 0) {
-        // If all chats are deleted, start a new one
         startNewChat();
         return [];
       }
-      if (activeId === id) {
-        setActiveId(filteredChats[0].id);
-      }
+      if (activeId === id) setActiveId(filteredChats[0].id);
       return filteredChats;
     });
   };
@@ -196,27 +250,25 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-200">
-      {/* Sidebar */}
+    <div className="flex h-screen bg-gradient-to-r from-[#56ccf2] to-[#b9d7fd]">
+      {/* Left Sidebar */}
       <div
-        className={`${
-          sidebarOpen ? "block" : "hidden"
-        } md:flex fixed md:static inset-0 md:inset-auto z-20 w-64 bg-gradient-to-b from-gray-900 to-gray-800 text-white flex-col`}
+        className={`${sidebarOpen ? "block" : "hidden"} md:flex fixed md:static inset-0 md:inset-auto z-20 w-64 bg-[#1b6ca8] text-white flex-col`}
       >
         <div className="flex items-center justify-between px-4 py-5 font-bold text-xl border-b border-white/10">
           <div className="flex items-center gap-2">
-            <Bot className="w-6 h-6 text-blue-400" /> SAHAYAK
+            <Bot className="w-6 h-6 text-white" /> SAHAYAK
           </div>
-          <button className="md:hidden p-2 rounded-full hover:bg-white/10" onClick={() => setSidebarOpen(false)}>
+          <button className="md:hidden p-2 rounded-full hover:bg-[#3282b8]" onClick={() => setSidebarOpen(false)}>
             <X className="w-6 h-6" />
           </button>
         </div>
         <div className="p-4">
           <button
             onClick={startNewChat}
-            className="flex items-center gap-2 w-full px-4 py-3 rounded-lg bg-gray-700 hover:bg-gray-600 transition"
+            className="flex items-center gap-2 w-full px-4 py-3 rounded-lg bg-[#1b6ca8] hover:bg-[#3282b8] transition"
           >
-            <Plus className="w-5 h-5" /> New Chat
+            <Plus className="w-5 h-5" /> {translations[language].ui.newChat}
           </button>
         </div>
         <div className="flex-1 overflow-y-auto space-y-2 px-2 pb-2">
@@ -228,15 +280,11 @@ export default function ChatBot() {
                 setSidebarOpen(false);
               }}
               className={`relative flex items-center gap-3 w-full text-left px-4 py-3 rounded-lg transition group ${
-                activeId === chat.id
-                  ? "bg-gray-700 text-white font-semibold"
-                  : "hover:bg-gray-700/50 text-gray-300"
+                activeId === chat.id ? "bg-[#3282b8] text-white font-semibold" : "hover:bg-[#3282b8] text-gray-300"
               }`}
             >
               <MessageCircle className="w-4 h-4" />
-              <span className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">
-                {chat.title}
-              </span>
+              <span className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">{chat.title}</span>
               <Trash2
                 onClick={(e) => deleteChat(e, chat.id)}
                 className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity absolute right-4"
@@ -247,179 +295,141 @@ export default function ChatBot() {
         <div className="border-t border-white/10 p-4">
           <div className="flex items-center gap-3 mb-4">
             <img src={ProfilePic} alt="Profile" className="w-9 h-9 rounded-full border-2 border-blue-400" />
-            <span className="text-md font-semibold text-white">Student User</span>
+            <span className="text-md font-semibold text-white">{translations[language].ui.studentUser}</span>
           </div>
-          <Link
-            to="/"
-            className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg transition"
-          >
-            <HomeIcon className="w-5 h-5 text-gray-300" /> Home
+          <Link to="/" className="flex items-center gap-3 hover:bg-white/10 px-3 py-2 rounded-lg transition">
+            <HomeIcon className="w-5 h-5 text-gray-300" /> {translations[language].ui.home}
           </Link>
         </div>
       </div>
 
-      {/* Chat Area - rest of your component */}
-      <div className="flex-1 flex flex-col">
-        {/* ... (rest of the ChatBot component) ... */}
-        <div className="bg-white px-4 py-3 shadow flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button
-              className="md:hidden p-1 rounded hover:bg-gray-200"
-              onClick={() => setSidebarOpen(true)}
-            >
-              <Menu className="w-6 h-6 text-gray-700" />
-            </button>
-            <h1 className="font-bold text-gray-700 text-xl">SAHAYAK</h1>
-          </div>
-          <select
-            value={language}
-            onChange={handleLanguageChange}
-            className="border border-gray-300 rounded-lg px-3 py-1 bg-gray-100 hover:bg-gray-200 focus:outline-none"
-          >
-            {Object.keys(translations).map((key) => (
-              <option key={key} value={key}>
-                {translations[key].label}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gradient-to-tr from-blue-200 through-white to-pink-100">
-          {activeChat.messages.map((msg, idx) => (
-            <div
-              key={idx}
-              className={`flex items-start ${
-                msg.sender === "user" ? "justify-end" : "justify-start"
-              }`}
-            >
-              {msg.sender === "bot" && (
-                <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center mr-3 shrink-0">
-                  <Bot className="w-5 h-5 text-gray-600" />
-                </div>
-              )}
-              <div
-                className={`px-4 py-3 rounded-2xl max-w-xs shadow-lg break-words ${
-                  msg.sender === "user"
-                    ? "bg-blue-600 text-white rounded-br-none"
-                    : "bg-gray-50 text-gray-800 rounded-bl-none"
-                }`}
-              >
-                {msg.image ? (
-                  <img
-                    src={msg.image}
-                    alt="uploaded"
-                    className="rounded-lg max-w-full shadow-sm"
-                  />
-                ) : (
-                  <>
-                    <span className="block">{msg.text}</span>
-                    {msg.sender === "bot" && (
-                      <div className="mt-2 flex justify-start">
-                        <TextToSpeech
-                          text={msg.text}
-                          lang={languageMap[language]}
-                        />
-                      </div>
-                    )}
-                  </>
-                )}
-              </div>
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col lg:flex-row bg-transparent">
+        {/* Chat Area */}
+        <div className="flex-1 flex flex-col">
+          <div className="bg-transparent px-4 py-3 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <button className="md:hidden p-1 rounded hover:bg-gray-200" onClick={() => setSidebarOpen(true)}>
+                <Menu className="w-6 h-6 text-gray-700" />
+              </button>
+              <h1 className="font-bold text-[#0f4c75] text-xl">SAHAYAK</h1>
             </div>
-          ))}
-
-          {isTyping && <TypingIndicator />}
-
-          {/* 🔽 Scroll target for auto-scroll */}
-          <div ref={bottomRef} />
-        </div>
-
-        {/* Input */}
-        <div className="border-t p-3 flex items-center bg-white">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && handleSend()}
-            placeholder="Type a message..."
-            className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-          <input
-            id="image-upload"
-            type="file"
-            accept="image/*"
-            className="hidden"
-            onChange={handleImageUpload}
-          />
-          <label
-            htmlFor="image-upload"
-            className="ml-2 p-2 cursor-pointer rounded-full hover:bg-gray-200"
-            title="Send image"
-          >
-            <ImageIcon className="w-5 h-5 text-gray-600" />
-          </label>
-          <VoiceToText
-            onResult={(text) => setInput((prev) => (prev ? prev + " " + text : text))}
-          />
-          <button
-            onClick={handleSend}
-            className="ml-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow"
-          >
-            <Send className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
-
-      {/* Right Sidebar */}
-      <div className="hidden lg:flex flex-col w-64 bg-[#F1F5F9] border-l border-gray-300">
-        <div className="bg-white m-4 p-4 rounded-2xl shadow-md flex flex-col items-center">
-          <div className="flex items-center justify-center mb-3">
-            <FileText className="w-6 h-6 mr-2 text-blue-700" />
-            <h1 className="font-semibold text-lg text-gray-700">
-              Quick Questions
-            </h1>
+            <select
+              value={language}
+              onChange={handleLanguageChange}
+              className="border border-gray-300 rounded-lg px-3 py-1 bg-gray-100 hover:bg-gray-200 focus:outline-none"
+            >
+              {Object.keys(translations).map((key) => (
+                <option key={key} value={key}>
+                  {translations[key].label}
+                </option>
+              ))}
+            </select>
           </div>
-          <ul className="flex-1 w-full px-2 py-2 overflow-y-auto space-y-2">
-            {qaData.map((qa, idx) => (
-              <li key={idx}>
-                <button
-                  onClick={() => {
-                    const questionText = qa.question[language];
-                    setInput(questionText);
-                    setTimeout(() => handleSend(), 100);
-                  }}
-                  className="w-full p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm"
+
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-transparent custom-scrollbar-hidden">
+            {activeChat.messages.map((msg, idx) => (
+              <div key={idx} className={`flex items-start ${msg.sender === "user" ? "justify-end" : "justify-start"}`}>
+                {msg.sender === "bot" && (
+                  <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center mr-3 shrink-0">
+                    <Bot className="w-5 h-5 text-gray-600" />
+                  </div>
+                )}
+                <div
+                  className={`px-4 py-3 rounded-2xl inline-block max-w-[70%] shadow-lg break-words ${
+                    msg.sender === "user"
+                      ? "bg-blue-100 text-gray-800 rounded-br-none"
+                      : "bg-gray-50 text-gray-800 rounded-bl-none"
+                  }`}
                 >
-                  {qa.question[language]}
+                  {msg.image ? (
+                    <img src={msg.image} alt="uploaded" className="rounded-lg max-w-full shadow-sm" />
+                  ) : (
+                    <>
+                      <span className="block">{msg.text}</span>
+                      {msg.sender === "bot" && (
+                        <div className="mt-2 flex justify-start">
+                          <TextToSpeech text={msg.text} lang={languageMap[language]} />
+                        </div>
+                      )}
+                    </>
+                  )}
+                </div>
+              </div>
+            ))}
+            {isTyping && <TypingIndicator />}
+            <div ref={bottomRef} />
+          </div>
+
+          <div className="p-3 flex items-center bg-transparent gap-1">
+            <input
+              type="text"
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => e.key === "Enter" && handleSend()}
+              placeholder="Type a message..."
+              className="flex-1 border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <input id="image-upload" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+            <label
+              htmlFor="image-upload"
+              className="ml-2 p-2 cursor-pointer bg-gray-200 rounded-full hover:bg-gray-200"
+              title="Send image"
+            >
+              <ImageIcon className="w-5 h-5 text-gray-600" />
+            </label>
+            <VoiceToText onResult={(text) => setInput((prev) => (prev ? prev + " " + text : text))} />
+            <button onClick={handleSend} className="ml-2 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full shadow">
+              <Send className="w-5 h-5" />
+            </button>
+          </div>
+        </div>
+
+        {/* Right Sidebar */}
+        <div className="hidden lg:flex flex-col w-64 bg-transparent ">
+          <div className="bg-white m-4 p-4 rounded-2xl shadow-md flex flex-col items-center">
+            <div className="flex items-center justify-center mb-3">
+              <FileText className="w-6 h-6 mr-2 text-blue-700" />
+              <h1 className="font-semibold text-lg text-gray-700">{translations[language].ui.quickQuestions}</h1>
+            </div>
+            <ul className="flex-1 w-full px-2 py-2 overflow-y-auto space-y-2">
+              {qaData.map((qa, idx) => (
+                <li key={idx}>
+                  <button
+                    onClick={() => {
+                      const questionText = qa.question[language];
+                      setInput(questionText);
+                      setTimeout(() => handleSend(), 100);
+                    }}
+                    className="w-full p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm"
+                  >
+                    {qa.question[language]}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="bg-white m-4 p-4 rounded-2xl shadow-md flex flex-col items-center">
+            <div className="flex items-center justify-center mb-3">
+              <PhoneCallIcon className="w-5 h-5 mr-2 text-green-700" />
+              <h1 className="font-semibold text-lg text-gray-700">
+                {translations[language].ui.contactDetails}
+              </h1>
+            </div>
+            <ul className="flex-1 w-full px-2 py-2 overflow-y-auto space-y-2">
+              <li>
+                <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm">
+                  <PhoneCallIcon className="w-5 h-5 text-blue-600" /> {translations[language].ui.callOffice}
                 </button>
               </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="bg-white m-4 p-4 rounded-2xl shadow-md flex flex-col items-center">
-          <div className="flex items-center justify-center mb-3">
-            <PhoneCallIcon className="w-5 h-5 mr-2 text-green-700" />
-            <h1 className="font-semibold text-lg text-gray-700">
-              Contact Details
-            </h1>
+              <li>
+                <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm">
+                  <MailIcon className="w-5 h-5 text-blue-600" /> {translations[language].ui.sendEmail}
+                </button>
+              </li>
+            </ul>
           </div>
-          <ul className="flex-1 w-full px-2 py-2 overflow-y-auto space-y-2">
-            <li>
-              <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm">
-                <PhoneCallIcon className="w-5 h-5 text-blue-600" /> Call Office
-              </button>
-            </li>
-            <li>
-              <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm">
-                <MailIcon className="w-5 h-5 text-blue-600" /> Send Email
-              </button>
-            </li>
-          </ul>
-        </div>
-
-        <div className="bg-gradient-to-r from-purple-500 to-blue-500 m-4 p-4 rounded-2xl shadow-md flex flex-col items-center">
-          <GraduationCap className="w-6 h-6 text-white mb-2" />
         </div>
       </div>
     </div>

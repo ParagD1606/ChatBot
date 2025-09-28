@@ -35,8 +35,8 @@ export default function About() {
 
           {/* Text */}
           <div className="space-y-6 text-gray-700 dark:text-gray-300">
-            <h3 className="text-2xl font-semibold">
-              Why Choose <span className="text-blue-500">SAHAYAK?</span>
+            <h3 className="text-2xl font-bold">
+              Why Choose <span className="text-[#49B1BC]">SAHAYAK?</span>
             </h3>
             <p>
               SAHAYAK is designed to simplify your college journey. Whether you’re exploring colleges, checking schedules, or applying for scholarships, we make it easy and accessible.

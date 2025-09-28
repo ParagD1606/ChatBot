@@ -15,7 +15,7 @@ const Navbar = ({ navigate }) => { // Accept the navigate prop
   return (
     <>
       {/* Fixed Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 w-screen bg-[#778DA9] text-white shadow">
+      <nav className="fixed top-0 left-0 right-0 z-50 w-screen bg-[#1C3F6B] text-white shadow">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
           <p className="font-bold text-2xl">SAHAYAK</p>
 
@@ -39,7 +39,7 @@ const Navbar = ({ navigate }) => { // Accept the navigate prop
             <li>
               <button
                 onClick={() => setLoginOpen(true)}
-                className="bg-white text-[#778DA9] px-4 py-2 rounded-full font-medium hover:bg-gray-200 transition"
+                className="bg-[#F2A84F] text-white px-4 py-2 rounded-full font-medium hover:scale-105 transition"
               >
                 Sign in
               </button>

@@ -92,7 +92,7 @@ const Hero2 = () => {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-white">
             <span className="block mb-2">Campus Information</span>
-            <span className="bg-gradient-to-r from-blue-300 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-[#4dc8d5] bg-clip-text text-transparent">
               Made {text}
               <span className="border-r-2 border-white animate-pulse ml-1"></span>
             </span>
@@ -140,7 +140,7 @@ const Hero2 = () => {
             {features.map((feature) => (
               <div
                 key={feature.title}
-                className="p-8 rounded-2xl transition duration-300 hover:shadow-lg hover:scale-105 bg-white hover:bg-gray-50 shadow-sm dark:bg-gray-800 dark:hover:bg-gray-700"
+                className="p-8 rounded-2xl transition duration-300 hover:shadow-lg hover:shadow-gray-700 hover:scale-105 bg-white hover:bg-gray-50 shadow-sm dark:bg-gray-800 dark:hover:bg-gray-700"
               >
                 <div className="mb-4">{feature.icon}</div>
                 <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>

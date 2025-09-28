@@ -59,7 +59,7 @@ const Analytics = () => (
   <div className="space-y-6">
     <div className="flex justify-between items-center">
       <h1 className="text-3xl font-bold">Analytics Dashboard</h1>
-      <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Export Report</button>
+      <button className="bg-[#F2A84F] text-white font-semibold px-4 py-2 rounded-lg hover:scale-105 transition">Export Report</button>
     </div>
     <p className="text-gray-700">Monitor SAHAYAK performance and user interactions</p>
 

@@ -1,38 +1,38 @@
 import React, { useState } from "react";
 import qaData from "../qaData.json";
-import { Upload } from 'lucide-react';
+import { Upload } from "lucide-react";
 
 const FaqManagement = () => {
   const [faqData, setFaqData] = useState(qaData);
   const [newQa, setNewQa] = useState({
     en: { question: "", answer: "", keywords: [] },
-    hi: { question: "", answer: "" },
   });
   const [pdfFile, setPdfFile] = useState(null);
 
-  const handleInputChange = (e, lang, type) => {
-    setNewQa(prev => ({ ...prev, [lang]: { ...prev[lang], [type]: e.target.value } }));
+  const handleInputChange = (e, type) => {
+    setNewQa((prev) => ({
+      ...prev,
+      en: { ...prev.en, [type]: e.target.value },
+    }));
   };
 
   const handleAddQa = (e) => {
     e.preventDefault();
     const newEntry = {
-      question: { en: newQa.en.question, hi: newQa.hi.question },
-      answer: { en: newQa.en.answer, hi: newQa.hi.answer },
-      keywords: newQa.en.keywords
+      question: { en: newQa.en.question },
+      answer: { en: newQa.en.answer },
+      keywords: newQa.en.keywords,
     };
-    
+
     // Simulate adding to the list
-    setFaqData(prev => [...prev, newEntry]);
-    
-    // Log to console as a placeholder for API call
+    setFaqData((prev) => [...prev, newEntry]);
+
     console.log("New QA submitted:", newEntry);
     alert("New Q&A added successfully! (Logged to console)");
-    
+
     // Reset form fields
     setNewQa({
       en: { question: "", answer: "", keywords: [] },
-      hi: { question: "", answer: "" },
     });
   };
 
@@ -42,11 +42,11 @@ const FaqManagement = () => {
       alert("Please select a PDF file first.");
       return;
     }
-    
+
     // Simulate file upload
     console.log("PDF file uploaded:", pdfFile.name, pdfFile);
     alert(`PDF file "${pdfFile.name}" uploaded successfully! (Logged to console)`);
-    
+
     // Reset file input
     setPdfFile(null);
     e.target.reset();
@@ -55,7 +55,9 @@ const FaqManagement = () => {
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">FAQ Management</h1>
-      <p className="text-gray-700">Add or remove frequently asked questions to improve chatbot accuracy.</p>
+      <p className="text-gray-700">
+        Add or remove frequently asked questions to improve chatbot accuracy.
+      </p>
 
       {/* Existing Questions Section */}
       <div className="bg-white p-6 rounded-lg shadow-lg space-y-4">
@@ -78,51 +80,38 @@ const FaqManagement = () => {
         <form onSubmit={handleAddQa} className="space-y-4">
           <h4 className="font-semibold text-gray-700">Add New Q&A</h4>
           <div>
-            <label className="block text-sm font-medium text-gray-700">English Question</label>
+            <label className="block text-sm font-medium text-gray-700">
+              English Question
+            </label>
             <input
               type="text"
               value={newQa.en.question}
-              onChange={(e) => handleInputChange(e, "en", "question")}
+              onChange={(e) => handleInputChange(e, "question")}
               className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500"
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">English Answer</label>
+            <label className="block text-sm font-medium text-gray-700">
+              English Answer
+            </label>
             <textarea
               rows="2"
               value={newQa.en.answer}
-              onChange={(e) => handleInputChange(e, "en", "answer")}
+              onChange={(e) => handleInputChange(e, "answer")}
               className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500"
               required
             />
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Hindi Question</label>
-            <input
-              type="text"
-              value={newQa.hi.question}
-              onChange={(e) => handleInputChange(e, "hi", "question")}
-              className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Hindi Answer</label>
-            <textarea
-              rows="2"
-              value={newQa.hi.answer}
-              onChange={(e) => handleInputChange(e, "hi", "answer")}
-              className="mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-cyan-500"
-              required
-            />
-          </div>
-          <button type="submit" className="w-full py-2 px-4 rounded-md text-white bg-cyan-600 hover:bg-cyan-700">
+          <button
+            type="submit"
+            className="w-full py-2 px-4 rounded-md text-white bg-cyan-600 hover:bg-cyan-700"
+          >
             Add New Q&A
           </button>
         </form>
       </div>
-      
+
       {/* PDF Upload Section */}
       <div className="bg-white p-6 rounded-lg shadow-lg space-y-4">
         <h4 className="font-semibold text-gray-700">Upload Knowledge Base PDF</h4>
@@ -153,12 +142,14 @@ const FaqManagement = () => {
               <p className="text-xs text-gray-500">PDF up to 10MB</p>
             </div>
           </div>
-          <button type="submit" className="w-full py-2 px-4 rounded-md text-white bg-cyan-600 hover:bg-cyan-700">
+          <button
+            type="submit"
+            className="w-full py-2 px-4 rounded-md text-white bg-cyan-600 hover:bg-cyan-700"
+          >
             Process PDF
           </button>
         </form>
       </div>
-
     </div>
   );
 };

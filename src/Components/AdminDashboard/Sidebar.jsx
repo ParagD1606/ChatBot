@@ -5,7 +5,7 @@ import ProfilePic from '../../assets/ProfilePic.jpeg';
 
 const Sidebar = ({ activeView, setActiveView, onLogout }) => {
   return (
-    <aside className="w-64 bg-[#1B263B] text-white flex flex-col p-6 fixed min-h-screen">
+    <aside className="w-64 bg-[#1C3F6B] text-white flex flex-col p-6 fixed min-h-screen">
       <div className="flex items-center gap-2 mb-8">
         <Bot className="w-6 h-6" />
         <h2 className="text-2xl font-bold">SAHAYAK</h2>
@@ -14,19 +14,19 @@ const Sidebar = ({ activeView, setActiveView, onLogout }) => {
         <div className="text-sm font-semibold text-gray-400 mb-2">NAVIGATION</div>
         <button
           onClick={() => setActiveView("analytics")}
-          className={`flex items-center gap-2 w-full p-2 rounded transition ${activeView === 'analytics' ? 'bg-cyan-600' : 'hover:bg-cyan-600'}`}
+          className={`flex items-center gap-2 w-full p-2 rounded transition ${activeView === 'analytics' ? 'bg-[#F2A84F]' : 'hover:bg-[#F2A84F]'}`}
         >
           <LineChart size={20} /> Analytics
         </button>
         <button
           onClick={() => setActiveView("faq")}
-          className={`flex items-center gap-2 w-full p-2 rounded transition ${activeView === 'faq' ? 'bg-cyan-600' : 'hover:bg-cyan-600'}`}
+          className={`flex items-center gap-2 w-full p-2 rounded transition ${activeView === 'faq' ? 'bg-[#F2A84F]' : 'hover:bg-[#F2A84F]'}`}
         >
           <FileText size={20} /> FAQ Management
         </button>
         <button
           onClick={() => setActiveView("settings")}
-          className={`flex items-center gap-2 w-full p-2 rounded transition ${activeView === 'settings' ? 'bg-cyan-600' : 'hover:bg-cyan-600'}`}
+          className={`flex items-center gap-2 w-full p-2 rounded transition ${activeView === 'settings' ? 'bg-[#F2A84F]' : 'hover:bg-[#F2A84F]'}`}
         >
           <Settings size={20} /> Settings
         </button>
