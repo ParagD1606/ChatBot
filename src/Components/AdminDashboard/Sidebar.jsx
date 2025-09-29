@@ -37,7 +37,7 @@ const Sidebar = ({ activeView, setActiveView, onLogout }) => {
           <p>Active Chats: <span className="font-bold">1</span></p>
           <p>Today's Users: <span className="font-bold">3</span></p>
           <p className="mt-2 text-green-400">Available: 24/7</p>
-          <p className="text-xs">5 Languages</p>
+          <p className="text-xs">6 Languages</p>
         </div>
       </div>
       <div className="flex items-center gap-2 px-2 py-4 mt-auto">

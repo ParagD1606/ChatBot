@@ -250,10 +250,10 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="flex h-screen bg-gradient-to-r from-[#56ccf2] to-[#b9d7fd]">
+    <div className="flex h-screen bg-[#F8F4EC]">
       {/* Left Sidebar */}
       <div
-        className={`${sidebarOpen ? "block" : "hidden"} md:flex fixed md:static inset-0 md:inset-auto z-20 w-64 bg-[#1b6ca8] text-white flex-col`}
+        className={`${sidebarOpen ? "block" : "hidden"} md:flex fixed md:static inset-0 md:inset-auto z-20 w-64 bg-[#1C3F6B] text-white flex-col`}
       >
         <div className="flex items-center justify-between px-4 py-5 font-bold text-xl border-b border-white/10">
           <div className="flex items-center gap-2">
@@ -280,14 +280,14 @@ export default function ChatBot() {
                 setSidebarOpen(false);
               }}
               className={`relative flex items-center gap-3 w-full text-left px-4 py-3 rounded-lg transition group ${
-                activeId === chat.id ? "bg-[#3282b8] text-white font-semibold" : "hover:bg-[#3282b8] text-gray-300"
+                activeId === chat.id ? "bg-[#F2A84F] text-white font-semibold" : "hover:bg-[#3282b8] text-gray-300"
               }`}
             >
               <MessageCircle className="w-4 h-4" />
               <span className="flex-1 whitespace-nowrap overflow-hidden text-ellipsis">{chat.title}</span>
               <Trash2
                 onClick={(e) => deleteChat(e, chat.id)}
-                className="w-4 h-4 text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity absolute right-4"
+                className="w-4 h-4 text-gray-100 opacity-0 group-hover:opacity-100 transition-opacity absolute right-4"
               />
             </button>
           ))}
@@ -338,7 +338,7 @@ export default function ChatBot() {
                 <div
                   className={`px-4 py-3 rounded-2xl inline-block max-w-[70%] shadow-lg break-words ${
                     msg.sender === "user"
-                      ? "bg-blue-100 text-gray-800 rounded-br-none"
+                      ? "bg-blue-500 text-white rounded-br-none"
                       : "bg-gray-50 text-gray-800 rounded-bl-none"
                   }`}
                 >

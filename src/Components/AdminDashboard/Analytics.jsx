@@ -40,7 +40,7 @@ const LanguageUsageChart = () => {
   const COLORS = ["#3b82f6", "#a855f7", "#ef4444", "#f97316"];
 
   return (
-    <ResponsiveContainer width="100%" height={250}>
+    <ResponsiveContainer width="100%" height={260}>
       <PieChart>
         <Pie data={data} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
           {data.map((entry, index) => (
