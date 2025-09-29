@@ -9,7 +9,7 @@ const AnalyticsWidgets = () => {
     { title: "Total Conversations", value: "16", change: "+12% this week", icon: <MessageSquare size={24} />, color: "text-blue-600 bg-blue-100" },
     { title: "Unique Students", value: "16", change: "+8% this week", icon: <Users size={24} />, color: "text-green-600 bg-green-100" },
     { title: "Avg Messages/Chat", value: "4.5", change: "", icon: <MessageCircle size={24} />, color: "text-purple-600 bg-purple-100" },
-    { title: "Satisfaction", value: "0%", change: "", icon: <Smile size={24} />, color: "text-orange-600 bg-orange-100" },
+    { title: "Satisfaction", value: "93.33%", change: "", icon: <Smile size={24} />, color: "text-orange-600 bg-orange-100" },
   ];
 
   return (

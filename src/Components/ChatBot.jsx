@@ -12,6 +12,7 @@ import {
   MailIcon,
   Image as ImageIcon,
   Trash2,
+  Star,
   MessageCircle,
 } from "lucide-react";
 import TypingIndicator from "./TypingIndecator";
@@ -121,6 +122,7 @@ export default function ChatBot() {
   const [listening, setListening] = useState(false);
   const recognitionRef = useRef(null);
   const bottomRef = useRef(null);
+  const [rating, setRating] = useState(0);
 
   const activeChat = chatSessions.find((c) => c.id === activeId) || chatSessions[0];
 
@@ -386,51 +388,80 @@ export default function ChatBot() {
         </div>
 
         {/* Right Sidebar */}
-        <div className="hidden lg:flex flex-col w-64 bg-transparent ">
-          <div className="bg-white m-4 p-4 rounded-2xl shadow-md flex flex-col items-center">
-            <div className="flex items-center justify-center mb-3">
-              <FileText className="w-6 h-6 mr-2 text-blue-700" />
-              <h1 className="font-semibold text-lg text-gray-700">{translations[language].ui.quickQuestions}</h1>
-            </div>
-            <ul className="flex-1 w-full px-2 py-2 overflow-y-auto space-y-2">
-              {qaData.map((qa, idx) => (
-                <li key={idx}>
-                  <button
-                    onClick={() => {
-                      const questionText = qa.question[language];
-                      setInput(questionText);
-                      setTimeout(() => handleSend(), 100);
-                    }}
-                    className="w-full p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm"
-                  >
-                    {qa.question[language]}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+<div className="hidden lg:flex flex-col w-64 bg-transparent ">
+  {/* Quick Questions */}
+  <div className="bg-white m-2 p-4 rounded-2xl shadow-md flex flex-col items-center">
+    <div className="flex items-center justify-center mb-3">
+      <FileText className="w-6 h-6 mr-2 text-blue-700" />
+      <h1 className="font-semibold text-lg text-gray-700">
+        {translations[language].ui.quickQuestions}
+      </h1>
+    </div>
+    <ul className="flex-1 w-full px-2 py-2 overflow-y-auto space-y-2">
+      {qaData.map((qa, idx) => (
+        <li key={idx}>
+          <button
+            onClick={() => {
+              const questionText = qa.question[language];
+              setInput(questionText);
+              setTimeout(() => handleSend(), 100);
+            }}
+            className="w-full p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm"
+          >
+            {qa.question[language]}
+          </button>
+        </li>
+      ))}
+    </ul>
+  </div>
 
-          <div className="bg-white m-4 p-4 rounded-2xl shadow-md flex flex-col items-center">
-            <div className="flex items-center justify-center mb-3">
-              <PhoneCallIcon className="w-5 h-5 mr-2 text-green-700" />
-              <h1 className="font-semibold text-lg text-gray-700">
-                {translations[language].ui.contactDetails}
-              </h1>
-            </div>
-            <ul className="flex-1 w-full px-2 py-2 overflow-y-auto space-y-2">
-              <li>
-                <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm">
-                  <PhoneCallIcon className="w-5 h-5 text-blue-600" /> {translations[language].ui.callOffice}
-                </button>
-              </li>
-              <li>
-                <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm">
-                  <MailIcon className="w-5 h-5 text-blue-600" /> {translations[language].ui.sendEmail}
-                </button>
-              </li>
-            </ul>
-          </div>
-        </div>
+  {/* Contact Details */}
+  <div className="bg-white m-4 p-4 rounded-2xl shadow-md flex flex-col items-center">
+    <div className="flex items-center justify-center mb-3">
+      <PhoneCallIcon className="w-5 h-5 mr-2 text-green-700" />
+      <h1 className="font-semibold text-lg text-gray-700">
+        {translations[language].ui.contactDetails}
+      </h1>
+    </div>
+    <ul className="flex-1 w-full px-2 py-2 overflow-y-auto space-y-2">
+      <li>
+        <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm">
+          <PhoneCallIcon className="w-5 h-5 text-blue-600" /> {translations[language].ui.callOffice}
+        </button>
+      </li>
+      <li>
+        <button className="w-full flex items-center gap-3 p-3 rounded-xl hover:bg-blue-50 transition text-gray-800 text-left shadow-sm">
+          <MailIcon className="w-5 h-5 text-blue-600" /> {translations[language].ui.sendEmail}
+        </button>
+      </li>
+    </ul>
+  </div>
+
+  {/* ⭐ Rate Us */}
+  <div className="bg-white m-1 p-2 rounded-2xl shadow-md flex flex-col items-center">
+    <h1 className="font-semibold text-md text-gray-700 mb-3">
+      {translations[language].ui.rateUs || "Rate Us"}
+    </h1>
+
+    <div className="flex space-x-1">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <button
+          key={star}
+          onClick={() => setRating(star)}
+          className="focus:outline-none"
+        >
+          <Star
+            className={`w-7 h-7 transition-colors ${
+              star <= rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"
+            }`}
+          />
+        </button>
+      ))}
+    </div>
+  </div>
+
+</div>
+
       </div>
     </div>
   );
