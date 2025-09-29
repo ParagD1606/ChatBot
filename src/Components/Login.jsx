@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { FcGoogle } from "react-icons/fc"; // nice Google icon
 
-const Login = ({ isOpen, onClose, navigate }) => { // Accept the navigate prop
+const Login = ({ isOpen, onClose, navigate }) => {
   const [show, setShow] = useState(false);
   const [role, setRole] = useState("student"); // student or admin
 
@@ -18,15 +19,13 @@ const Login = ({ isOpen, onClose, navigate }) => { // Accept the navigate prop
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    onClose(); // Close the modal on submission
+    onClose();
+    if (role === "student") navigate("/chat");
+    else if (role === "admin") navigate("/admin");
+  };
 
-    // --- Navigate based on role ---
-    if (role === "student") {
-      navigate('/chat');
-    } else if (role === "admin") {
-      navigate('/admin');
-    }
-    // -----------------------------
+  const handleGoogleClick = () => {
+    alert("Logged in with google click login");
   };
 
   return (
@@ -62,7 +61,9 @@ const Login = ({ isOpen, onClose, navigate }) => { // Accept the navigate prop
           </button>
         </div>
 
-        <h1 className="mb-8 text-center text-3xl font-bold text-white">{role === "student" ? "Student Login" : "Admin Login"}</h1>
+        <h1 className="mb-6 text-center text-3xl font-bold text-white">
+          {role === "student" ? "Student Login" : "Admin Login"}
+        </h1>
 
         <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
           <input
@@ -79,6 +80,7 @@ const Login = ({ isOpen, onClose, navigate }) => { // Accept the navigate prop
             required
             className="w-full rounded-full bg-white px-4 py-2 text-black outline-none focus:ring-2 focus:ring-cyan-400"
           />
+
           <button
             type="submit"
             className="w-full rounded-full bg-cyan-500 px-6 py-2 font-semibold text-white shadow-md transition-colors duration-300 hover:bg-cyan-600 active:opacity-80"
@@ -86,9 +88,21 @@ const Login = ({ isOpen, onClose, navigate }) => { // Accept the navigate prop
             Login
           </button>
 
+          {/* --- Google Login (frontend only) --- */}
+          <button
+            type="button"
+            onClick={handleGoogleClick}
+            className="flex items-center justify-center gap-2 w-full rounded-full bg-white px-6 py-2 font-semibold text-gray-700 shadow-md transition-colors duration-300 hover:bg-gray-100 active:opacity-80"
+          >
+            <FcGoogle className="w-5 h-5" />
+            Continue with Google
+          </button>
+
           <p className="text-center text-gray-200">
             New user?{" "}
-            <span className="cursor-pointer text-cyan-300 hover:underline">Register</span>
+            <span className="cursor-pointer text-cyan-300 hover:underline">
+              Register
+            </span>
           </p>
 
           <button

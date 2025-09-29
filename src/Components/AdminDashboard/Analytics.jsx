@@ -34,7 +34,7 @@ const LanguageUsageChart = () => {
     { name: "English", value: 56 },
     { name: "Hindi", value: 19 },
     { name: "Gujarati", value: 13 },
-    { name: "Marathi", value: 12 },
+    { name: "Rajasthani", value: 12 },
   ];
 
   const COLORS = ["#3b82f6", "#a855f7", "#ef4444", "#f97316"];
